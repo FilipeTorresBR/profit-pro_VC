@@ -4,18 +4,12 @@ import pyautogui as pg
 
 screenshot = pg.screenshot()
 screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
-img = cv2.imread("img/c_limite2.png")
+img = cv2.imread("img/c_mercado.png")
 img_cinza = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-limite = pg.locateOnScreen(img, confidence=0.5)
-#cv2.rectangle(
-#    screenshot,
-#    (limite.left, limite.top),
-#    (limite.left + limite.width, limite.top + limite.height),
-#    (0, 0, 255),
-#    2
-#)
+limite = pg.locateOnScreen(img_cinza, confidence=0.7)
+centro = pg.center(limite)
+
 print(limite)
-pg.moveTo(limite)
+pg.moveTo(centro.x, centro.y)
 cv2.imshow('Screenshot', screenshot)
 
-cv2.waitKey(0)
